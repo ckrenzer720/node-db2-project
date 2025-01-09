@@ -27,7 +27,12 @@ router.post(
   checkVinNumberValid,
   checkVinNumberUnique,
   async (req, res, next) => {
-    res.json("posting new car");
+    try {
+      const newCar = await Car.create(req.body);
+      res.json(newCar);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 

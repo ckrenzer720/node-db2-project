@@ -6,8 +6,10 @@ server.use(express.json());
 
 server.use("/api/cars", carsRouter);
 
-server.use((error, req, res, next) => {
-  res.status(error.status || 500).json({ message: error.message });
+server.use((err, req, res, next) => {
+  res.status(err.status || 500).json({
+    message: err.message || "Internal Server Error",
+  });
 });
 
 module.exports = server;
